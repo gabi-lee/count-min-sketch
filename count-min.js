@@ -72,10 +72,15 @@ proto.update = function(key, v) {
   var tab = this.table
   var ptr = 0
   this.hashFunc(key, scratch)
+  var res = [];
   for(var i=0; i<d; ++i) {
-    tab[ptr + (scratch[i] % w)] += v
+    var pos = ptr + (scratch[i] % w);
+    res.push(pos);
+    tab[pos] += v
     ptr += w
   }
+
+  return res;
 }
 
 proto.query = function(key) {
